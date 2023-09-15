@@ -42,10 +42,8 @@ int main()
 		printf("\n");
 				
 		while (1) {			
-			int answer = sub_menu();
-			int c;
-			while ((c = getchar()) != '\n' && c != EOF);			
-			if (answer == 2) {		// 2번 다시입력 선택시 while문을 탈출, 메인 while문으로 되돌아간다
+			int answer = sub_menu();					
+			if (answer == 2) {		// 2번 입력시 while문을 탈출, 메인 while문으로 되돌아간다
 				break;
 			}
 		}
@@ -58,19 +56,19 @@ int sub_menu()
 	while (1) {
 		printf("1.다음 단계  2.다시 입력\n");		
 		scanf("%d", &menu);
-		if (menu != 1 && menu != 2) {
+		if (menu != 1 && menu != 2) {	// 만약 입력한 menu가 1도 아니고 2도 아닐 경우
 			system("cls");
 			int c;
-			while ((c = getchar()) != '\n' && c != EOF);
+			while ((c = getchar()) != '\n' && c != EOF);	// 문자 입력시 버퍼 초기화
 			printf("잘못 입력하셨습니다.\n");
 			printf("다시 입력하여 주십시오.\n");			
 		}
-		else if (menu == 1) {
+		else if (menu == 1) {	// 만약 입력한 menu가 1이라면
 			printf("다음 화면으로 넘어갑니다.\n");
 			system("pause");
 			break;
 		}
-		else if (menu == 2) {
+		else if (menu == 2) {	// 만약 입력한 menu가 2라면
 			printf("처음 화면으로 되돌아갑니다.\n");
 			system("pause");
 			break;
