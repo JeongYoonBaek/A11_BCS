@@ -14,15 +14,16 @@ void title()
 	gotoxy(x, y + 5); printf("▣            ▣      ▣     ▣    ▣      ▣   ▣        ▣       ▣    ▣▣    ▣     ▣");
 	gotoxy(x, y + 6); printf("▣            ▣      ▣     ▣     ▣     ▣    ▣       ▣       ▣      ▣     ▣    ▣");
 	gotoxy(x, y + 7); printf("▣            ▣      ▣     ▣      ▣    ▣     ▣    ▣▣▣     ▣      ▣      ▣▣▣");
-	gotoxy(x, y + 10); printf("▣▣▣▣▣    ▣▣▣▣▣    ▣▣▣▣▣");
-	gotoxy(x, y + 11); printf("▣            ▣            ▣");
-	gotoxy(x, y + 12); printf("▣            ▣            ▣");
-	gotoxy(x, y + 13); printf("▣▣▣▣▣    ▣▣▣▣▣    ▣▣▣▣▣");
+	gotoxy(x, y + 12); printf("▣▣▣▣▣    ▣▣▣▣▣    ▣▣▣▣▣");
+	gotoxy(x, y + 13); printf("▣            ▣            ▣");
 	gotoxy(x, y + 14); printf("▣            ▣            ▣");
-	gotoxy(x, y + 15); printf("▣            ▣            ▣");
+	gotoxy(x, y + 15); printf("▣▣▣▣▣    ▣▣▣▣▣    ▣▣▣▣▣");
 	gotoxy(x, y + 16); printf("▣            ▣            ▣");
-	gotoxy(x, y + 17); printf("▣            ▣▣▣▣▣    ▣▣▣▣▣");
-	gotoxy(x+36, y + 11); printf("             ⊙⊙⊙⊙⊙⊙⊙");
+	gotoxy(x, y + 17); printf("▣            ▣            ▣");
+	gotoxy(x, y + 18); printf("▣            ▣            ▣");
+	gotoxy(x, y + 19); printf("▣            ▣▣▣▣▣    ▣▣▣▣▣");
+
+	gotoxy(x + 36, y + 11); printf("             ⊙⊙⊙⊙⊙⊙⊙");
 	gotoxy(x + 36, y + 12); printf("            ⊙            ⊙");
 	gotoxy(x + 36, y + 13); printf("          ⊙    ⊙⊙⊙⊙    ⊙");
 	gotoxy(x + 36, y + 14); printf("         ⊙     ⊙⊙⊙⊙     ⊙⊙⊙⊙⊙⊙⊙");
@@ -33,12 +34,9 @@ void title()
 	gotoxy(x + 36, y + 19); printf("          ⊙⊙                   ⊙⊙");
 
 
-
-	
-
-	gotoxy(x + 82, y + 11); printf("이용시간: 06:00~22:00\n");
-	gotoxy(x + 82, y + 15); printf("1시간 이하 무료");
-	gotoxy(x + 82, y + 17); printf("30분당 500원 부과");
+	gotoxy(x + 82, y + 12); printf("이용시간: 06:00~22:00\n");
+	gotoxy(x + 84, y + 16); printf("1시간 이하 무료");
+	gotoxy(x + 84, y + 18); printf("30분당 500원 부과");
 
 }
 
