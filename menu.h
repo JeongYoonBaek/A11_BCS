@@ -10,4 +10,3 @@ typedef enum {
 
 extern int main_menu();		//extern 외부에 보여주도록 하는 기능. 생략가능 컴파일러가 자동으로 붙여줌
 #endif
-

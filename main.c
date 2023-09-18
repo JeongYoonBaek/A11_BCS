@@ -48,7 +48,7 @@ int main() {
 				printf("\n");
 				printf("\n");
 				system("cls");
-				if (car.car_num < CAR_NUM_MAX)	//이거 대충쳐놨는데 예원님껄로 바꿔주세요 .. 저는 이해가 안가서 못하겠어요
+				if (car.car_num>=CAR_NUM_MIN && car.car_num <= CAR_NUM_MAX)	//이거 대충쳐놨는데 예원님껄로 바꿔주세요 .. 저는 이해가 안가서 못하겠어요
 					break;
 			}
 			for (int i = 0; i < 1; i++) {
@@ -142,7 +142,7 @@ int main() {
 						printf("\n");
 					}
 					if (hour < 1) {
-						printf("한시간 이하는 무료입니다. 안녕히가세요.");
+						printf("한시간 이하는 무료입니다. 안녕히가세요.\n");
 						break;
 					}
 					if (min == 0) {
