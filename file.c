@@ -26,9 +26,16 @@ void file_read(char filename[])
 	int count = 1;
 	int check = 0;	//while수행하면 1로바뀌고, 수행안하면 0	check 플래그변수
 	while (fread(&car, sizeof(car), 1, fp) == 1) {
+		printf("\n");
+		printf("\n");
 		printf("	차량 번호: %d \n", car.car_num);
 		printf("\n");
 		printf("	입차 시간: %d시 %d분\n", car.time.ent_hour, car.time.ent_min);
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("==============================================\n");
 		check = 1;
 	}
 	fclose(fp);

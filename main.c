@@ -9,12 +9,13 @@
 #include "ui.h"
 
 void receipt(PARKING car, int hour, int min, int fee);
+void show_title();
 
 int main() {
 	char file[] = "parkingfee.bin";	//파일이름
 	srand(time(NULL));	//랜덤함수
 	set_cursor_type(NOCURSOR);
-	font_color(LIGHT_RED);
+	font_color(YELLOW);
 	title();
 	_getch();	//화면을 일시정지 상태로 만들기 위해 , system("pause") 사용가능
 
@@ -30,15 +31,10 @@ int main() {
 	while (1) {
 		system("cls");
 		int menu = main_menu();
-
-		if (menu = MAIN_CAR_NUM) {
+		if (MAIN_CAR_NUM == menu) {
 			while (1) {
 				system("cls");
-				printf("==============================================\n");
-				printf("\n");
-				printf("	  차량 정산 프로그램 v1.0\n");
-				printf("\n");
-				printf("==============================================\n");
+				show_title();	//중복되는 안내문 함수로
 				printf("\n");
 				printf("\n");
 				printf("\n");
@@ -52,40 +48,22 @@ int main() {
 				if (car.car_num >= CAR_NUM_MIN && car.car_num <= CAR_NUM_MAX)
 					break;
 			}
-			for (int i = 0; i < 1; i++) {
-				car.time.ent_hour = (rand() % 14) + 6;
-				car.time.ent_min = rand() % 59;
-				file_write(car, file);
-				printf("==============================================\n");
-				printf("\n");
-				printf("	  차량 정산 프로그램 v1.0\n");
-				printf("\n");
-				printf("==============================================\n");
-				printf("\n");
-				printf("\n");
-				file_read(file);
-				printf("\n");
-				printf("\n");
-				printf("\n");
-				printf("\n");
-				printf("==============================================\n");
-				printf("\n");
-				int num;
-				printf(">>> 1 입력시 처음으로 되돌아갑니다. \n");
-				scanf("%d", &num);
-				if (num == 1) {
-					break;
-				}
-			}
+			car.time.ent_hour = (rand() % 14) + 6;
+			car.time.ent_min = rand() % 59;
+			file_write(car, file);
+			show_title();	//중복되는 안내문 함수로
+			file_read(file);
+			
+			printf("\n");
+			int num;
+			printf(">>> 1 입력시 처음으로 되돌아갑니다. \n");
+			scanf("%d", &num);
+			system("pause");
 		}
-		if (menu = MAIN_PAYMENT) {
+		else if (MAIN_PAYMENT == menu) {
 			system("cls");
 			while (1) {
-				printf("==============================================\n");
-				printf("\n");
-				printf("	  차량 정산 프로그램 v1.0\n");
-				printf("\n");
-				printf("==============================================\n");
+				show_title();	//중복되는 안내문 함수로
 				printf("\n");
 				printf("\n");
 				printf("\n");
@@ -100,55 +78,38 @@ int main() {
 					break;
 				}
 			}
-			printf("==============================================\n");
-			printf("\n");
-			printf("	  차량 정산 프로그램 v1.0\n");
-			printf("\n");
-			printf("==============================================\n");
-			printf("\n");
-			printf("\n");
-			printf("	차량 번호: %d \n", car.car_num);
-			printf("\n");
-			printf("	입차 시간: %d시 %d분\n", car.time.ent_hour, car.time.ent_min);
-			printf("\n");
-			printf("\n");
-			printf("\n");
-			printf("\n");
-			printf("==============================================\n");
+			show_title();	//중복되는 안내문 함수로
+			file_read(file);
 			int num;
 			printf(">>> 1 입력시 다음으로 넘어갑니다. \n");
 			scanf("%d", &num);
+			system("pause");
 			system("cls");
-			if (num == 1) {
-				printf("==============================================\n");
-				printf("\n");
-				printf("	  차량 정산 프로그램 v1.0\n");
-				printf("\n");
-				printf("==============================================\n");
-				printf("\n");
-				printf("		예시: 00:00\n");
-				printf("\n");
-				printf("\n");
-				printf("출차 시간을 입력하세요 =>  ");
-				scanf("%d : %d", &car.time.exit_hour, &car.time.exit_min);
-				if (car.time.exit_min > car.time.ent_min) {
-					hour = car.time.exit_hour - (car.time.ent_hour);
-					min = car.time.exit_min - (car.time.ent_min);
-				}
-				else {
-					hour = (car.time.exit_hour - (car.time.ent_hour)) - 1;
-					min = ((car.time.exit_min - car.time.ent_min)) + 60;
-				}
-				printf("\n");
-				printf(">입차: %d시 %d분<\n", car.time.ent_hour, car.time.ent_min);
-				printf("\n");
-				printf(">출차: %d시 %d분<\n", car.time.exit_hour, car.time.exit_min);
-				printf("\n");
-				printf("이용 시간 : %d시간 %d분 \n", hour, min);
-				printf("\n");
-				printf("\n");
+			show_title();	//중복되는 안내문 함수로
+			printf("\n");
+			printf("		예시: 00:00\n");
+			printf("\n");
+			printf("\n");
+			printf("출차 시간을 입력하세요 =>  ");
+			scanf("%d : %d", &car.time.exit_hour, &car.time.exit_min);
+			if (car.time.exit_min >= car.time.ent_min) {	
+				hour = car.time.exit_hour - (car.time.ent_hour);
+				min = car.time.exit_min - (car.time.ent_min);
+			} 
+			else {
+				hour = (car.time.exit_hour - (car.time.ent_hour)) - 1;
+				min = ((car.time.exit_min - car.time.ent_min)) + 60;
 			}
-			if (hour <= 1) {
+			printf("\n");
+			printf(">입차: %d시 %d분<\n", car.time.ent_hour, car.time.ent_min);
+			printf("\n");
+			printf(">출차: %d시 %d분<\n", car.time.exit_hour, car.time.exit_min);
+			printf("\n");
+			printf("이용 시간 : %d시간 %d분 \n", hour, min);
+			printf("\n");
+			printf("\n");
+		
+			if (hour < 1 || (hour == 1 && min == 0)) {
 				printf("한시간 이하는 무료입니다. 안녕히가세요.\n");
 				break;
 			}
@@ -171,11 +132,7 @@ int main() {
 			if (num == 1) {
 				system("cls");
 				while (1) {
-					printf("==============================================\n");
-					printf("\n");
-					printf("	  차량 정산 프로그램 v1.0\n");
-					printf("\n");
-					printf("==============================================\n");
+					show_title();
 					printf("금액을 투입하세요: ");   // 이용 금액 투입
 					scanf("%d", &cost);              // 투입할 금액 입력 
 					printf("금액을 투입 하였습니다.\n"); // 성공적으로 금액 투입하였음을 출력
@@ -194,45 +151,52 @@ int main() {
 						system("cls");
 					}
 				}
-				printf("\n");
-				printf("\n");
-				printf("영수증을 받아가세요.\n");
-				receipt(car, hour, min, fee);
 			}
 			else if (num == 2) {
 				system("cls");
-				printf("==============================================\n");
-				printf("\n");
-				printf("	  차량 정산 프로그램 v1.0\n");
-				printf("\n");
-				printf("==============================================\n");
+				show_title();
 				printf("카드를 리더기에 넣어주세요.\n");
 				printf("결제중입니다.... 카드를 뽑지 마세요.\n");
 				Sleep(3000); // sec - ms - us - ns	//딜레이
 				printf("\n");
 				printf("\n");
 				printf("결제가 완료되었습니다.\n");
-				printf("영수증을 받아가세요.\n");
-				system("pause");
 			}
+			printf("\n");
+			printf("\n");
+			printf("영수증을 받아가세요. \n");
+			printf("\n");
+			printf("\n");
+			system("pause");
 			system("cls");
 			receipt(car, hour, min, fee);
-			//} if문 중괄호
-			exit(0);
+			printf("\n");
+			printf("\n");
+			printf("5초뒤에 홈화면으로 넘어갑니다.");
+			Sleep(5000);
 		}
-	}
+	}	//while 문 .
 }
 
-	void receipt(PARKING car, int hour, int min, int fee) {
-		printf("------------------------------\n");
-		printf("   주차 이용 시스템 영수증\n");
-		printf("------------------------------\n");
-		printf("차량 번호 : %d \n", car.car_num);
-		printf("입차 시간 : %d시 %d분 \n", car.time.ent_hour, car.time.ent_min);
-		printf("출차 시간 : %d시 %d분 \n", car.time.exit_hour, car.time.exit_min);
-		printf("이용 시간 : %d시간 %d분\n", hour, min);
-		printf("결제 금액 : %d원 \n", fee);
-		printf("------------------------------\n");
-		printf("이용 해주셔서 감사합니다\n");
-		printf("------------------------------\n");
-	}
+
+void receipt(PARKING car, int hour, int min, int fee) {
+	printf("------------------------------\n");
+	printf("   주차 이용 시스템 영수증\n");
+	printf("------------------------------\n");
+	printf("차량 번호 : %d \n", car.car_num);
+	printf("입차 시간 : %d시 %d분 \n", car.time.ent_hour, car.time.ent_min);
+	printf("출차 시간 : %d시 %d분 \n", car.time.exit_hour, car.time.exit_min);
+	printf("이용 시간 : %d시간 %d분\n", hour, min);
+	printf("결제 금액 : %d원 \n", fee);
+	printf("------------------------------\n");
+	printf("이용 해주셔서 감사합니다\n");
+	printf("------------------------------\n");
+}
+
+void show_title() {
+	printf("==============================================\n");
+	printf("\n");
+	printf("	  차량 정산 프로그램 v1.0\n");
+	printf("\n");
+	printf("==============================================\n");
+}
