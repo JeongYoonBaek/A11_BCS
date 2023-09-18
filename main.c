@@ -95,7 +95,10 @@ int main() {
 				printf("\n");
 				printf("\n");
 				system("cls");
-				if (car.car_num < CAR_NUM_MAX) {
+				if (car.car_num >= CAR_NUM_MIN && car.car_num <= CAR_NUM_MAX) {
+					break;
+				}
+			}
 					printf("==============================================\n");
 					printf("\n");
 					printf("	  차량 정산 프로그램 v1.0\n");
@@ -111,7 +114,7 @@ int main() {
 					printf("\n");
 					printf("\n");
 					printf("==============================================\n");
-					int num;
+					/*int num;*/
 					printf(">>> 1 입력시 다음으로 넘어갑니다. \n");
 					scanf("%d", &num);
 					system("cls");
@@ -121,6 +124,9 @@ int main() {
 						printf("	  차량 정산 프로그램 v1.0\n");
 						printf("\n");
 						printf("==============================================\n");
+						printf("\n");
+						printf("		예시: 00:00\n");
+						printf("\n");
 						printf("\n");
 						printf("출차 시간을 입력하세요 =>  ");
 						scanf("%d : %d", &car.time.exit_hour, &car.time.exit_min);
@@ -141,7 +147,7 @@ int main() {
 						printf("\n");
 						printf("\n");
 					}
-					if (hour < 1) {
+					if (hour <= 1) {
 						printf("한시간 이하는 무료입니다. 안녕히가세요.\n");
 						break;
 					}
@@ -210,13 +216,12 @@ int main() {
 					}
 					system("cls");
 					receipt(car, hour, min, fee);
-				}
+				//} if문 중괄호
 				exit(0);
 			}
 			}
 		}
 	}
-}
 
 	void receipt(PARKING car, int hour, int min, int fee) {
 		printf("------------------------------\n");
