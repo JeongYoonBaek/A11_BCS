@@ -30,7 +30,9 @@ int main() {
 
 	while (1) {
 		system("cls");
-		int menu = main_menu();
+		char menu = main_menu();
+		rewind(stdin);
+
 		if (MAIN_CAR_NUM == menu) {
 			while (1) {
 				system("cls");

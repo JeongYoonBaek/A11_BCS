@@ -2,8 +2,8 @@
 #define __MENU_H__
 
 typedef enum {
-	MAIN_CAR_NUM = 1,		//차량번호조회 메뉴												//소스관리도구:형상관리도구
-	MAIN_PAYMENT			//정산 메뉴
+	MAIN_CAR_NUM = '1',		//차량번호조회 메뉴												//소스관리도구:형상관리도구
+	MAIN_PAYMENT 		//정산 메뉴
 							//github,Perforce,SVN,NAS
 
 } MAIN_MENU;
