@@ -25,16 +25,48 @@ void file_read(char filename[])
 	int count = 1;
 	int check = 0;	//while수행하면 1로바뀌고, 수행안하면 0	check 플래그변수
 	while (fread(&car, sizeof(car), 1, fp) == 1) {
-		printf("\n");
-		printf("\n");
-		printf("	차량 번호: %d \n", car.car_num);
-		printf("\n");
-		printf("	입차 시간: %d시 %d분\n", car.time.ent_hour, car.time.ent_min);
+		printf("\n");	
 		printf("\n");
 		printf("\n");
 		printf("\n");
 		printf("\n");
-		printf("==============================================\n");
+		printf("         ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+		printf("         ┃                           ┃\n");
+		printf("             차량 번호: %d        \n", car.car_num);
+		printf("\n");
+		printf("             입차 시간: %d 시 %d 분 \n", car.time.ent_hour, car.time.ent_min);
+		printf("         ┃                           ┃\n");
+		printf("         ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		check = 1;
+	}
+	fclose(fp);
+	if (check == 0) {
+		printf("데이터가 존재하지 않습니다.\n");
+	}
+}
+void file_read2(char filename[],int hour,int min)
+{
+	FILE* fp = fopen(filename, "rb");
+	if (fp == NULL) {
+		printf("파일 읽기 오류!\n");
+	}
+	PARKING car = { 0 };	//비어있는 임시 변수 생성
+	int count = 1;
+	int check = 0;	//while수행하면 1로바뀌고, 수행안하면 0	check 플래그변수
+	while (fread(&car, sizeof(car), 1, fp) == 1) {
+		printf("         ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+		printf("         ┃                           ┃\n");
+		printf("             차량 번호: %d        \n", car.car_num);
+		printf("\n");
+		printf("             입차 시간: %d 시 %d 분 \n", car.time.ent_hour, car.time.ent_min);
+		printf("\n");
+		printf("             출차 시간: %d 시 %d 분 \n", car.time.exit_hour, car.time.exit_min);
+		printf("\n");
+		printf("             이용시간: %d 시간 %d 분 \n", hour, min);
 		check = 1;
 	}
 	fclose(fp);

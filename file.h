@@ -18,4 +18,5 @@ typedef struct PARKING{
 
 void file_write(PARKING car, char filename[]);
 void file_read(char filename[]);
+void file_read2(char filename[], int hour, int min);
 #endif
