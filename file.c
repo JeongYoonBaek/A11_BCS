@@ -15,7 +15,6 @@ void file_write(PARKING car , char filename[])	//정의에 있는 매개변수는 빈껍데기
 	fclose(fp);
 }
 
-
 void file_read(char filename[])
 {
 	FILE* fp = fopen(filename, "rb");
