@@ -1,16 +1,16 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
+#include "menu.h"
 
-char main_menu()
+int main_menu()
 {
 	char menu;	
 	while (1) {
 		system("cls");
 		printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
 		printf("┃                                             ┃\n");
-		printf("┃	       차량 정산 프로그램             ┃\n");
+		printf("┃	     차량 정산 프로그램 v1.3          ┃\n");
 		printf("┃                                             ┃\n");
-		printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+		printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		printf("\n");
 		printf("\n");
 		printf("\n"); 
@@ -47,5 +47,208 @@ char main_menu()
 	//1.현금을 넣어주세요(지폐만 가능) -> 1.> /....영수증을 출력하시겠습니까?(1.예/ 2.아니오) -> 감사합니다 안녕히가십시오.
 	//2.카드를 ic칩 방향으로 넣어주세요 ... 결제중입니다...영수증을 출력하시겠습니까?(1.예/ 2.아니오) ->감사합니다 안녕히가십시오.
 	
+}
+
+int insert_carnum(PARKING car) {
+
+	while (1) {
+		system("cls");
+		show_title();
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+		printf("      ┃ 차량번호 네자리를 입력해주세요. ┃\n");
+		printf("      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+		printf("\n");
+		printf("\n");
+		printf("		   ");
+		if (scanf("%d", &car.car_num) == 0) {
+			rewind(stdin);
+		}
+		else {
+			break;
+		}
+		printf("\n");
+		printf("\n");
+		printf("\n");
+	}
+	return car.car_num;
+}
+void show_title() {
+	printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("┃                                             ┃\n");
+	printf("┃	     차량 정산 프로그램 v1.3          ┃\n");
+	printf("┃                                             ┃\n");
+	printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	printf("\n");
+}
+
+void pay(int fee, int cost) {
+
+	int num;
+	int total = 0;
+	printf("		  요금: %d 원\n", fee);
+	printf("         ┃                           ┃\n");
+	printf("         ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+	printf("\n");
+	printf("           결제방식을 선택해주세요.\n");
+	printf("\n");
+	printf("          1.현금	       2.카드\n");
+	printf("\n");
+	printf("           ");
+	scanf("%d", &num);
+	if (num == 1) {
+		system("cls");
+		while (1) {
+			system("cls");
+			show_title();
+			printf("\n");
+			printf("\n");
+			printf("\n");
+			printf("      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+			printf("      ┃	       금액을 투입하세요.       ┃\n");
+			printf("      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");   // 이용 금액 투입
+			printf("\n");
+			printf("		     ");
+			scanf("%d", &cost);              // 투입할 금액 입력 
+			total += cost;
+			printf("\n");
+			printf("\n");
+			if (fee == total) {  // 이용금액과 투입 금액이 같을때 결제 완료가 되었다는 조건문을 작성
+				printf("	     결제가 완료 되었습니다.\n");
+				break;
+			}
+			else if (fee < total) {  // 투입 금액이 이용 금액보다 많을 때 거스름돈 금액을 출력
+				printf("	     거스름돈 %d원입니다.\n", total - fee);
+				break;
+			}
+			else if (fee > total) { // 투입 금액이 부족할 때 금액이 부족하다는 문구를 출력과 동시 재입력으로 되돌아감
+				printf("	투입 금액 %d 원이 부족합니다.\n", fee - total);
+				printf("\n");
+				printf("\n");
+				Sleep(2000);
+				continue;
+			}
+		}
+	}
+	else if (num == 2) {		//출력만 함
+		system("cls");
+		show_title(); 
+		printf("\n");
+		printf("      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+		printf("      ┃  카드를 리더기에 넣어주세요.    ┃\n");
+		printf("      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+		printf("\n");
+		printf("        결제중입니다. 카드를 뽑지 마세요.\n");
+		printf("\n");
+		Sleep(3000); // sec - ms - us - ns	//딜레이
+		printf("		     ㆍ\n");
+		Sleep(600);
+		printf("		     ㆍ\n");
+		Sleep(600);
+		printf("		     ㆍ\n");
+		Sleep(600);
+		printf("	     결제가 완료 되었습니다.\n");
+	}
+}
+
+void receipt(PARKING car, int hour, int min, int fee) {
+	printf("        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("        ┃                            ┃\n");
+	printf("           주차 이용 시스템 영수증\n");
+	printf("         ────────────────────────────\n");
+	printf("          입차시간 : %d시 %d분 \n", car.time.ent_hour, car.time.ent_min);
+	printf("\n");
+	printf("          출차시간 : %d시 %d분 \n", car.time.exit_hour, car.time.exit_min);
+	printf("\n");
+	printf("          이용 시간 : %d시간 %d분\n", hour, min);
+	printf("\n");
+	printf("          결제 금액 : %d원 \n", fee);
+	printf("        ┃                            ┃\n");
+	printf("        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+	printf("\n");
+	printf("\n");
+	printf("	   이용 해주셔서 감사합니다\n");
+	printf("\n");
+}
+
+void show_ent_hour(PARKING car) {
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("         ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("         ┃                           ┃\n");
+	printf("             차량 번호: %d        \n", car.car_num);
+	printf("\n");
+	printf("             입차 시간: %d 시 %d 분 \n", car.time.ent_hour, car.time.ent_min);
+	printf("         ┃                           ┃\n");
+	printf("         ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+}
+
+void insert_exit_hour() {
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("	      <<  예시: 00:00  >>\n");
+	printf("\n");
+	printf("        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("        ┃    출차시간을 입력하세요.  ┃\n");
+	printf("        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+	printf("\n");
+	printf("\n");
+	printf("		    ");
+}
+
+void receipt_msg(PARKING car, int hour, int min, int fee) {
+	for (int i = 5; i > 0; i--) {
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("	      영수증을 받아가세요. \n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		system("cls");
+		receipt(car, hour, min, fee);
+		printf("\n");
+		printf("\n");
+		printf("%d초 뒤에 홈화면으로 넘어갑니다.", i);
+		Sleep(1000);
+	}
+}
+
+void cal_fee(int fee, int cost, int hour, int min){
+	if (hour < 1 || (hour == 1 && min == 0)) {
+				printf("		  요금: %d 원\n", fee);
+				printf("         ┃                           ┃\n");
+				printf("         ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+				printf("\n");
+				printf("\n");
+				printf("	    한시간 이하는 무료입니다.\n");
+			}
+			else if (min == 0) {				//30분당 500원씩 부과
+				fee = (((hour * 60) + min) / 30 * 500) - 1000;		//
+				/*printf("요금: %d원\n", fee);*/
+				pay(fee, cost);
+			}
+			else if (min > 0 && min <= 30) {	//1분~30분일 경우 반올림 함	예)10분일경우에도 30분, 25분일 경우에도 30분으로 계산
+				fee = (((hour * 60) + 30) / 30 * 500) - 1000;
+				/*printf("요금: %d원\n", fee);*/
+				pay(fee, cost);
+			}
+			else {								//31~59분일 경우 시간 반올림 예) 이용시간이 2시간 35분이면 3시간으로 계산
+				fee = ((((hour + 1) * 60)) / 30 * 500) - 1000;
+				pay(fee, cost);
+			}
 }
 

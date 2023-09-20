@@ -11,9 +11,15 @@ typedef struct TIME {
 	int exit_min;	//출차 분 입력
 }TIME;
 
+typedef struct AREA {
+	char eng[20];
+	int num;
+}AREA;
+
 typedef struct PARKING{
 	int car_num;		//차량번호
 	TIME time;
+	AREA area;			
 } PARKING;
 
 void file_write(PARKING car, char filename[]);
