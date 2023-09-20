@@ -152,7 +152,7 @@ int main() {
 			}
 			printf("\n");
 			printf("\n");
-			printf("영수증을 받아가세요. \n");
+			printf("	 영수증을 받아가세요. \n");
 			printf("\n");
 			printf("\n");
 			system("pause");
@@ -245,16 +245,16 @@ void pay(int fee,int cost){
 	else if (num == 2) {		//출력만 함
 		system("cls");
 		show_title(); printf("\n");
+		printf("      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+		printf("      ┃  카드를 리더기에 넣어주세요.    ┃\n");
+		printf("      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
 		printf("\n");
-		printf("	 카드를 리더기에 넣어주세요.\n");
-		printf("\n");
-		printf("\n");
-		printf("	 결제중입니다.... 카드를 뽑지 마세요.\n");
+		printf("      결제중입니다.... 카드를 뽑지 마세요.\n");
 		Sleep(3000); // sec - ms - us - ns	//딜레이
 		printf("\n");
 		printf("\n");
 		printf("\n");
 		printf("\n");
-		printf("결제가 완료되었습니다.\n");
+		printf("	 결제가 완료되었습니다.\n");
 	}
 }
