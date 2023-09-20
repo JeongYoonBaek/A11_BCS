@@ -4,6 +4,8 @@
 
 void title()
 {
+	system("mode con:cols=120 lines=32");
+	system("title 제목");
 	int x = 10;
 	int y = 5;
 	gotoxy(x, y + 0); printf("▣▣▣▣▣       ▣▣        ▣▣▣▣      ▣    ▣     ▣▣▣     ▣      ▣      ▣▣▣");
@@ -35,9 +37,8 @@ void title()
 
 
 	gotoxy(x + 82, y + 12); printf("이용시간: 06:00~22:00\n");
-	gotoxy(x + 84, y + 16); printf("1시간 이하 무료");
-	gotoxy(x + 84, y + 18); printf("30분당 500원 부과");
-
+	gotoxy(x + 84, y + 16); printf("1시간 이하 무료\n");
+	gotoxy(x + 84, y + 18); printf("30분당 500원 부과\n");
 }
 
 void gotoxy(int x, int y)

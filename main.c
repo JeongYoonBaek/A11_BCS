@@ -15,8 +15,7 @@ int insert_carnum();
 int main() {
 	char file[] = "parkingfee.bin";	//파일이름
 	srand(time(NULL));	//랜덤함수
-	system("mode con:cols=120 lines=32");
-	system("title 제목");
+	
 	set_cursor_type(NOCURSOR);	
 	font_color(YELLOW);
 	title();
@@ -45,7 +44,7 @@ int main() {
 				if (car.car_num >= CAR_NUM_MIN && car.car_num <= CAR_NUM_MAX)
 					break;							//차량번호 입력받을 범위 
 			}
-			car.time.ent_hour = (rand() % 15) + 6;	//입차 시 06~21 사이 랜덤값 저장	 
+			car.time.ent_hour = (rand() % 14) + 6;	//입차 시 06~20 사이 랜덤값 저장	 
 			car.time.ent_min = rand() % 59;			//입차 분 00~59 사이 랜덤값 저장 
 			file_write(car, file);					//파일에 차량번호와 입차시간 쓰기
 			show_title();							//중복되는 안내문 함수로
@@ -245,10 +244,15 @@ void pay(int fee,int cost){
 	}
 	else if (num == 2) {		//출력만 함
 		system("cls");
-		show_title();
-		printf("카드를 리더기에 넣어주세요.\n");
-		printf("결제중입니다.... 카드를 뽑지 마세요.\n");
+		show_title(); printf("\n");
+		printf("\n");
+		printf("	 카드를 리더기에 넣어주세요.\n");
+		printf("\n");
+		printf("\n");
+		printf("	 결제중입니다.... 카드를 뽑지 마세요.\n");
 		Sleep(3000); // sec - ms - us - ns	//딜레이
+		printf("\n");
+		printf("\n");
 		printf("\n");
 		printf("\n");
 		printf("결제가 완료되었습니다.\n");
