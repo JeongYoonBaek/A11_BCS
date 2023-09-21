@@ -4,7 +4,7 @@
 #include <string.h>	// strcpy()
 #include "file.h"
 
-void file_write(PARKING car , char filename[])	//정의에 있는 매개변수는 빈껍데기. 메인에서 호출할 때 채워짐
+void file_write(PARKING car, char filename[])	//정의에 있는 매개변수는 빈껍데기. 메인에서 호출할 때 채워짐
 {
 	FILE* fp = fopen(filename, "wb");
 	if (fp == NULL) {
@@ -21,11 +21,11 @@ void file_read(char filename[])
 	if (fp == NULL) {
 		printf("파일 읽기 오류!\n");
 	}
-	PARKING car = {0};	//비어있는 임시 변수 생성
+	PARKING car = { 0 };	//비어있는 임시 변수 생성
 	int count = 1;
 	int check = 0;	//while수행하면 1로바뀌고, 수행안하면 0	check 플래그변수
 	while (fread(&car, sizeof(car), 1, fp) == 1) {
-		printf("\n");	
+		printf("\n");
 		printf("\n");
 		printf("\n");
 		printf("\n");
@@ -48,13 +48,13 @@ void file_read(char filename[])
 		printf("데이터가 존재하지 않습니다.\n");
 	}
 }
-void file_read2(char filename[],int hour,int min)
+void file_read2(PARKING car, char filename[])
 {
 	FILE* fp = fopen(filename, "rb");
 	if (fp == NULL) {
 		printf("파일 읽기 오류!\n");
 	}
-	PARKING car = { 0 };	//비어있는 임시 변수 생성
+	//PARKING car = { 0 };	//비어있는 임시 변수 생성
 	int count = 1;
 	int check = 0;	//while수행하면 1로바뀌고, 수행안하면 0	check 플래그변수
 	while (fread(&car, sizeof(car), 1, fp) == 1) {
@@ -66,7 +66,7 @@ void file_read2(char filename[],int hour,int min)
 		printf("\n");
 		printf("             출차 시간: %d 시 %d 분 \n", car.time.exit_hour, car.time.exit_min);
 		printf("\n");
-		printf("             이용 시간: %d 시간 %d 분 \n", hour, min);
+		printf("             이용 시간: %d 시간 %d 분 \n", car.time.hour, car.time.min);
 		check = 1;
 	}
 	fclose(fp);
@@ -74,5 +74,3 @@ void file_read2(char filename[],int hour,int min)
 		printf("데이터가 존재하지 않습니다.\n");
 	}
 }
-
-
