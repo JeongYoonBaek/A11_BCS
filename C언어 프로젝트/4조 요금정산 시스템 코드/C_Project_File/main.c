@@ -1,0 +1,110 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <windows.h> //sleep
+#include "menu.h"
+#include "file.h"
+#include "data.h"
+#include "ui.h"
+
+int main() {
+	char file[] = "parkingfee.bin";	//파일이름
+	srand(time(NULL));	//랜덤함수
+
+	set_cursor_type(NOCURSOR);
+	font_color(YELLOW);
+	title();
+	_getch();	//화면을 일시정지 상태로 만들기 위해 , system("pause") 사용가능
+
+	system("cls");
+	font_color(LIGHT_GRAY);
+	set_cursor_type(NORMAL_CURSOR);
+
+	PARKING car = { 0 };
+	while (1) {
+		system("cls");
+		char menu = main_menu();
+		rewind(stdin);
+
+		if (MAIN_CAR_NUM == menu) {													// 하드코딩을 방지하기 위해 enum을 선언  
+			while (1) {
+				car.car_num = insert_carnum(car);									//차량번호 네자리 받는 함수
+				system("cls"); 
+				if (car.car_num >= CAR_NUM_MIN && 
+					car.car_num <= CAR_NUM_MAX)						//차량번호 입력받을 범위 
+					break;															//숫자 네자리는 입력되지만 문자 입력 시 무한루프 
+			}
+			strcpy(car.area.eng, eng[rand() % 8]);
+			car.area.num = num[rand() % 11];
+
+			car.time.ent_hour = (rand() % 14) + 6;	//입차 시 06~20 사이 랜덤값 저장	 
+			car.time.ent_min = rand() % 59;	
+			
+			//입차 분 00~59 사이 랜덤값 저장 
+			file_write(car, file);					//파일에 차량번호와 입차시간 쓰기
+			show_title();							//중복되는 안내문 함수로
+			file_read(file);						//쓴 파일 읽어오기
+			printf("\n");
+			int num;
+			printf("	1 입력시 처음으로 되돌아갑니다. \n");
+			printf("\n");
+			printf("	  >>>  ");
+			scanf("%d", &num);
+			printf("\n");
+			system("pause");						//while문을 벗어나지 않도록 일시정지 상태를 만들어줌
+		}
+		else if (MAIN_PAYMENT == menu) {
+			system("cls");
+			while (1) {
+				car.car_num = insert_carnum(car);	//차량번호 네자리 입력받는 함수
+				system("cls");
+				if (car.car_num >= CAR_NUM_MIN && car.car_num <= CAR_NUM_MAX) {
+					break;
+				}
+			}
+			system("cls");
+			show_title();	//중복되는 안내문 함수로
+			show_ent_time(car);	//차량번호,입차시간 안내
+			int num;
+			printf("	1 입력시 다음으로 넘어갑니다. \n");
+			printf("\n");
+			printf("	  >>>  ");
+			scanf("%d", &num);
+			printf("\n");
+			system("pause");
+			system("cls");
+			while (1) {
+				system("cls");
+				show_title();	//중복되는 안내문 함수로
+				insert_exit_time();	//출차시간 입력
+				scanf("%d : %d", &car.time.exit_hour, &car.time.exit_min);
+				//조건이 참일경우 브레이크 빠져나가서 실행
+
+				if ((car.time.exit_hour > car.time.ent_hour												//1. 출차시간이 입차시간보다 크고(늦고),
+					&& car.time.exit_hour >= 6 
+					&& car.time.exit_hour < 22 && car.time.exit_min <= 59)				//2. 출차시간이 6시에서 21:59분 사이이거나 	
+					|| (car.time.exit_hour == 22 && car.time.exit_min == 00))							//3. 출차시간이 22: 00분일 때 while문 탈출. 
+					break;
+			}
+
+			if (car.time.exit_min >= car.time.ent_min) {
+				car.time.hour = car.time.exit_hour - (car.time.ent_hour);
+				car.time.min = car.time.exit_min - (car.time.ent_min);
+			}
+			else {				//만약 (출차 분 - 입차 분) 했을 때 음수값이 나온다면 
+				car.time.hour = (car.time.exit_hour - (car.time.ent_hour)) - 1;		//시간 -1
+				car.time.min = ((car.time.exit_min - car.time.ent_min)) + 60;		//분 +60
+			}
+			system("cls");
+			show_title();	//중복되는 안내문 함수로
+
+			file_write(car, file);
+			printf("\n");
+			file_read2(car, file);		//차량번호, 입차, 출차, 이용시간 안내
+			printf("\n");
+			printf("\n");
+			cal_fee(car);
+		}
+	}//while 문 닫는 괄호임
+}
